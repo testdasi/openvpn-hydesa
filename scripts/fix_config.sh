@@ -4,13 +4,13 @@ update-locale LANG=$LANG
 echo '[info] language fixed.'
 
 mkdir -p /config/stubby \
-    && cp -n /temp/stubby.yml /config/stubby/ \
+    && cp -n /temp/stubby.yml /config/stubby/
 sed -i "s|  - 0\.0\.0\.0\@53|  - 0\.0\.0\.0\@$DNS_PORT|g" '/config/stubby/stubby.yml'
 echo '[info] stubby fixed.'
 
 mkdir -p /config/dante \
     && cp -n /temp/danted.conf /config/dante/
-sed -i "s|internal: eth0 port=1080|internal: eth0 port=$DANTE_PORT|g" '/config/danted.conf'
+sed -i "s|internal: eth0 port=1080|internal: eth0 port=$DANTE_PORT|g" '/config/dante/danted.conf'
 echo '[info] danted fixed.'
 
 mkdir -p /config/tinyproxy \
