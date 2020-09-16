@@ -52,7 +52,7 @@ sabnzbdplus --daemon --config-file /config/sabnzbdplus/sabnzbdplus.ini --pidfile
 
 ### deluge-web
 echo "[info] Run deluge-web in background on HTTP port $DELUGE_PORT"
-deluged --quiet --config=/config/deluge
+#deluged --quiet --config=/config/deluge
 deluge-web --fork --quiet --config=/config/deluge-web
 
 ### nzbhydra2
