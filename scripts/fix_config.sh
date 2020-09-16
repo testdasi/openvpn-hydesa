@@ -36,7 +36,9 @@ mkdir -p /config/deluge-web \
     && mkdir -p /data/deluge/incomplete \
     && mkdir -p /data/deluge/complete \
     && mkdir -p /data/deluge/torrent
+sed -i "s|\"port\": 8112|\"port\": $DELUGE_PORT|g" '/config/deluge-web/web.conf'
 echo '[info] deluge fixed.'
+
 
 mkdir -p /config/nzbhydra2 \
     && cp -n /temp/nzbhydra.yml /config/nzbhydra2/
