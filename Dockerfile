@@ -10,7 +10,7 @@ ADD scripts /
 RUN /bin/bash /install.sh \
     && rm -f /install.sh
 
-VOLUME ["/config"]
+VOLUME ["/config", "/data"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 
