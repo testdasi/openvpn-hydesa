@@ -1,2 +1,2 @@
-# openvpn-nzb-hysasora
-OpenVPN Client with (NZB)hydra-sabnzbd-sonarr-radarr (at least that's the plan)
+# openvpn-hydesa
+OpenVPN Client with integrated (NZB)Hydra-Deluge-Sabnzbd (and HTTP + SOCKS5 proxies)
