@@ -11,5 +11,9 @@
 #echo '[info] tinyproxy fixed.'
 
 mkdir -p /config/sabnzbdplus \
-    && cp -n /temp/sabnzbdplus.ini /config/sabnzbdplus/
+    && cp -n /temp/sabnzbdplus.ini /config/sabnzbdplus/ \
+    && mkdir -p /data/sabnzbdplus/watch \
+    && mkdir -p /data/sabnzbdplus/incomplete \
+    && mkdir -p /data/sabnzbdplus/complete \
+    && mkdir -p /data/sabnzbdplus/script
 echo '[info] sabnzbdplus fixed.'
