@@ -293,9 +293,20 @@ categoriesConfig:
     subtype: "NONE"
   defaultCategory: "All"
 downloading:
-  downloaders: []
+  downloaders:
+  - apiKey: "4fbd8f35caaa77eff270e29b5635ec19"
+    defaultCategory: ""
+    downloadType: "NZB"
+    enabled: true
+    iconCssClass: ""
+    name: "HySaSora"
+    nzbAddingType: "UPLOAD"
+    downloaderType: "SABNZBD"
+    url: "http://127.0.0.1:8080"
+    username: null
+    password: null
   saveTorrentsTo: null
-  saveNzbsTo: null
+  saveNzbsTo: "/data/sabnzbdplus/watch"
   sendMagnetLinks: true
   updateStatuses: true
   showDownloaderStatus: true
