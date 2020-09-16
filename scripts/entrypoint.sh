@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ### sabnzbdplus config
+echo '[info] Creating sabnzbdplus config if not exist'
 mkdir -p /config/sabnzbdplus \
     && cp -n /temp/sabnzbdplus.ini /config/sabnzbdplus/
 
