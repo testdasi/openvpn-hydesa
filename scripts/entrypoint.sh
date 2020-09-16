@@ -46,11 +46,17 @@ echo ''
 echo "[info] Run tinyproxy in background with no log on port $TINYPROXY_PORT"
 tinyproxy -c /config/tinyproxy/tinyproxy.conf
 
+### nzbhydra2
+echo "[info] Run nzbhydra2 in background on port $NZBHYDRA2_PORT"
+cd /app/nzbhydra2 \
+    && nzbhydra2 --daemon --nobrowser --java /usr/lib/jvm/java-11-openjdk-amd64/bin/java --datafolder /config/nzbhydra2 --pidfile /config/nzbhydra2/nzbhydra2.pid
+
 ### sabnzbdplus
-echo '[info] Run sabnzbdplus in background'
+echo "[info] Run sabnzbdplus in background on HTTP port $SAB_PORT_A and HTTPS port $SAB_PORT_B"
 sabnzbdplus --daemon --config-file /config/sabnzbdplus/sabnzbdplus.ini --pidfile /config/sabnzbdplus/sabnzbd.pid
 
 ### Infinite loop to stop docker from stopping ###
+cd /
 sleep 10s
 while true
 do
@@ -65,6 +71,8 @@ do
     echo "[info] danted PID: $pidlist"
     pidlist=$(pidof tinyproxy)
     echo "[info] tinyproxy PID: $pidlist"
+    pidlist=$(cat /config/nzbhydra2/nzbhydra2.pid)
+    echo "[info] nzbhydra2 PID: $pidlist"
     pidlist=$(cat /config/sabnzbdplus/sabnzbd.pid)
     echo "[info] sabnzbdplus PID: $pidlist"
     sleep 3600s
