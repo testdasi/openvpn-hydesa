@@ -29,12 +29,13 @@ sed -i "s|port = 8080|port = $SAB_PORT_A|g" '/config/sabnzbdplus/sabnzbdplus.ini
 sed -i "s|https_port = 8090|https_port = $SAB_PORT_B|g" '/config/sabnzbdplus/sabnzbdplus.ini'
 echo '[info] sabnzbdplus fixed.'
 
-mkdir -p /config/deluge \
-    && mkdir -p /config/deluge-web \
+mkdir -p /config/deluge-web \
+    && cp -n /temp/deluge.conf /config/deluge-web/core.conf \
+    && cp -n /temp/deluge-web.conf /config/deluge-web/web.conf \
     && mkdir -p /data/deluge/watch \
     && mkdir -p /data/deluge/incomplete \
     && mkdir -p /data/deluge/complete \
-    && mkdir -p /data/deluge/script
+    && mkdir -p /data/deluge/torrent
 echo '[info] deluge fixed.'
 
 mkdir -p /config/nzbhydra2 \
