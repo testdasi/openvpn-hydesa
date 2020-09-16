@@ -22,7 +22,8 @@ ADD scripts /
 RUN /bin/bash /install.sh \
     && rm -f /install.sh
 
-VOLUME ["/config", "/data"]
+#VOLUME ["/config", "/data"]
+VOLUME ["/config"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 
