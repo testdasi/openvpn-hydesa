@@ -5,6 +5,7 @@ FROM ${FRM}:${TAG}
 ARG FRM
 ARG TAG
 
+ADD config /temp
 ADD scripts /
 
 RUN /bin/bash /install.sh \
