@@ -77,6 +77,8 @@ do
     echo "[info] tinyproxy PID: $pidlist"
     pidlist=$(cat /config/sabnzbdplus/sabnzbd.pid)
     echo "[info] sabnzbdplus PID: $pidlist"
+    pidlist=$(cat /config/deluge-web/deluged.pid | sed 's/;58846//g')
+    echo "[info] deluge PID: $pidlist"
     pidlist=$(cat /config/nzbhydra2/nzbhydra2.pid)
     echo "[info] nzbhydra2 PID: $pidlist"
     sleep 3600s
