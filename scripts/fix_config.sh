@@ -1,5 +1,8 @@
 #!/bin/bash
 
+update-locale LANG=$LANG
+echo '[info] language fixed.'
+
 #sed -i "s|  - 0\.0\.0\.0\@53|  - 0\.0\.0\.0\@$DNS_PORT|g" '/etc/stubby/stubby.yml'
 #echo '[info] stubby fixed.'
 
