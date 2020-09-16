@@ -48,8 +48,7 @@ tinyproxy -c /config/tinyproxy/tinyproxy.conf
 
 ### nzbhydra2
 echo "[info] Run nzbhydra2 in background on port $NZBHYDRA2_PORT"
-cd /app/nzbhydra2 \
-    && nzbhydra2 --daemon --nobrowser --java /usr/lib/jvm/java-11-openjdk-amd64/bin/java --datafolder /config/nzbhydra2 --pidfile /config/nzbhydra2/nzbhydra2.pid
+cd /app/nzbhydra2/nzbhydra2 --daemon --nobrowser --java /usr/lib/jvm/java-11-openjdk-amd64/bin/java --datafolder /config/nzbhydra2 --pidfile /config/nzbhydra2/nzbhydra2.pid
 
 ### sabnzbdplus
 echo "[info] Run sabnzbdplus in background on HTTP port $SAB_PORT_A and HTTPS port $SAB_PORT_B"
