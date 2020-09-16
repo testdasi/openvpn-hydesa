@@ -48,11 +48,23 @@ tinyproxy -c /config/tinyproxy/tinyproxy.conf
 
 ### sabnzbdplus
 echo '[info] Run sabnzbdplus in background'
-sabnzbdplus --daemon --config-file /config/sabnzbdplus/sabnzbdplus.ini --pid /config/sabnzbdplus/
+sabnzbdplus --daemon --config-file /config/sabnzbdplus/sabnzbdplus.ini --pidfile /config/sabnzbdplus/sabnzbd.pid
 
 ### Infinite loop to stop docker from stopping ###
 while true
 do
-    echo 'It is running'
+    echo ''
+    iphiden=$(dig +short myip.opendns.com @208.67.222.222)
+    echo "[info] Your VPN public IP is $iphiden"
+    pidlist=$(pidof openvpn)
+    echo "[info] OpenVPN PID: $pidlist"
+    pidlist=$(pidof stubby)
+    echo "[info] stubby PID: $pidlist"
+    pidlist=$(pidof danted)
+    echo "[info] danted PID: $pidlist"
+    pidlist=$(pidof tinyproxy)
+    echo "[info] tinyproxy PID: $pidlist"
+    pidlist=$(cat /config/sabnzbdplus/sabnzbd.pid)
+    echo "[info] sabnzbdplus PID: $pidlist"
     sleep 3600s
 done
