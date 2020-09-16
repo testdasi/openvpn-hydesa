@@ -50,6 +50,10 @@ tinyproxy -c /config/tinyproxy/tinyproxy.conf
 echo "[info] Run sabnzbdplus in background on HTTP port $SAB_PORT_A and HTTPS port $SAB_PORT_B"
 sabnzbdplus --daemon --config-file /config/sabnzbdplus/sabnzbdplus.ini --pidfile /config/sabnzbdplus/sabnzbd.pid
 
+### deluge-web
+echo "[info] Run deluge-web in background on HTTP port $DELUGE_PORT"
+deluge-web --fork --quiet --config=/config/deluge-web --logfile=/config/deluge-web/deluge-web.log
+
 ### nzbhydra2
 echo "[info] Run nzbhydra2 in background on port $HYDRA_PORT"
 /app/nzbhydra2/nzbhydra2 --daemon --nobrowser --java /usr/lib/jvm/java-11-openjdk-amd64/bin/java --datafolder /config/nzbhydra2 --pidfile /config/nzbhydra2/nzbhydra2.pid
