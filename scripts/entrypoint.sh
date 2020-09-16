@@ -48,7 +48,7 @@ echo '[info] All configs fixed'
 
 ### sabnzbdplus
 echo '[info] Run sabnzbdplus in background'
-sabnzbdplus --config-file /config/sabnzbdplus/sabnzbdplus.ini
+sabnzbdplus --daemon --config-file /config/sabnzbdplus/sabnzbdplus.ini --pid /config/sabnzbdplus/
 
 ### Infinite loop to stop docker from stopping ###
 while true
