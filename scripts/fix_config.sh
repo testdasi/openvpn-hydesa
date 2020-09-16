@@ -8,7 +8,8 @@ mkdir -p /config/stubby \
 sed -i "s|  - 0\.0\.0\.0\@53|  - 0\.0\.0\.0\@$DNS_PORT|g" '/config/stubby/stubby.yml'
 echo '[info] stubby fixed.'
 
-cp -n /temp/danted.conf /config/
+mkdir -p /config/dante \
+    && cp -n /temp/danted.conf /config/dante/
 sed -i "s|internal: eth0 port=1080|internal: eth0 port=$DANTE_PORT|g" '/config/danted.conf'
 echo '[info] danted fixed.'
 
