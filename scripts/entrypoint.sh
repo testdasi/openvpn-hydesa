@@ -1,5 +1,9 @@
 #!/bin/bash
 
+### sabnzbdplus config
+mkdir -p /config/sabnzbdplus \
+    && cp -n /temp/sabnzbdplus.ini /config/sabnzbdplus/
+
 ### Infinite loop to stop docker from stopping ###
 while true
 do
