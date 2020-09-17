@@ -59,27 +59,31 @@ OpenVPN Client with integrated (NZB)**Hy**dra2-**De**luge-**Sa**bnzbd (and HTTP 
 ## Unraid example
     docker run -d \
         --name='OpenVPN-HyDeSa' \
+        --net='bridge' \
         --cap-add=NET_ADMIN \
-        -v /mnt/user/appdata/openvpn-hydesa:/config:'rw' \
-        -v /mnt/user/downloads:/data \
-        -v '/mnt/user/appdata/openvpn-aio-client':'/etc/openvpn':'rw' \
+        -v '/mnt/user/appdata/openvpn-hydesa':'/config':'rw' \
+        -v '/mnt/user/downloads/':'/data':'rw' \
         -e 'DNS_SERVERS'='127.2.2.2' \
-        -e 'HOST_NETWORK'='192.168.0.1/24' \
+        -e 'HOST_NETWORK'='10.132.6.0/23' \
         -p '8153:53/tcp' \
         -p '8153:53/udp' \
         -p '9118:9118/tcp' \
         -p '8118:8118/tcp' \
-        -p '9119:9119/tcp' \
-        -p '8119:8119/tcp' \
+        -p '8080:8080/tcp' \
+        -p '8090:8090/tcp' \
+        -p '8112:8112/tcp' \
+        -p '5076:5076/tcp' \
         -e 'DNS_SERVER_PORT'='53' \
         -e 'SOCKS_PROXY_PORT'='9118' \
         -e 'HTTP_PROXY_PORT'='8118' \
-        -e 'TOR_SOCKS_PORT'='9119' \
-        -e 'TOR_HTTP_PORT'='8119' \
-        --net='bridge' \
+        -e 'USENET_HTTP_PORT'='8080' \
+        -e 'USENET_HTTPS_PORT'='8090' \
+        -e 'TORRENT_GUI_PORT'='8112' \
+        -e 'SEARCHER_GUI_PORT'='5076' \
+        -e 'LANG'='en_GB.UTF-8' \
         -e TZ="Europe/London" \
         -e HOST_OS="Unraid" \
-        'testdasi/openvpn-client-aio:stable-amd64' 
+        'testdasi/openvpn-hydesa:stable-amd64' 
 
 ## Notes
 * I code for fun and my personal uses; hence, these niche functionalties that nobody asks for. ;)
