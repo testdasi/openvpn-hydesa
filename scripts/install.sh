@@ -22,5 +22,13 @@ mkdir -p /temp \
 cp -f /temp/* /static/config/ \
     && rm -rf /temp
 
+# fix static files for repo-specific stuff
+sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_stubby.sh'
+sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_dante.sh'
+sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_tinyproxy.sh'
+sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_sabnzbdplus.sh'
+sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_deluge.sh'
+sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_nzbhydra2.sh'
+
 # chmod scripts
 chmod +x /*.sh
