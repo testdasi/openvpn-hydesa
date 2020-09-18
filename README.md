@@ -6,6 +6,7 @@ OpenVPN Client with integrated (NZB)**Hy**dra2-**De**luge-**Sa**bnzbd (and HTTP 
 * Copy your OpenVPN configuration to the above openvpn subfolder (must include openvpn.ovpn + credentials + certs).
 * Don't forget to map /data in the docker to the host (you can map the parent or individual subfolders depending on needs).
 * Start docker (other apps should configure themselves on first run).
+  * Default password for deluge is deluge
 
 ## Key features
 1. OpenVPN client to connect to your favourite VPN provider. Full freedom with what you want to do with the ovpn file.
@@ -16,12 +17,15 @@ OpenVPN Client with integrated (NZB)**Hy**dra2-**De**luge-**Sa**bnzbd (and HTTP 
 1. NZBHydra2 (ip:5076)
 1. Deluge (ip:8112)
 1. SABnzbdPlus (ip:8080 or ip:8090 for https)
+1. A quick WebGUI launcher (ip:8000) to quickly access the trio of apps above (or as always, just go directly to each app).
 
 ## Bits and bobs
 * OpenVPN config files MUST be named openvpn.ovpn. The certs and credentials can be included in the config file or split into separate files. The flexibility is yours.
 * Explaining the parameters (the values you see in Usage section are default values)
+  * SERVER_IP: IP of the docker host (if bridge network) or the static IP you give to the docker (if macvlan bridge e.g. Unraid br0 / br1)
+  * LAUNCHER_GUI_PORT: the GUI quick launcher is accessible at SERVER_IP:LAUNCHER_GUI_PORT.
   * DNS_SERVERS: set to 127.2.2.2 will point to stubby (which in turn points to Google / Cloudflare DoT services). Your DNS queries out of the VPN exit will also be encrypted before arriving at Google / Cloudflare for even more privacy. Change it to other comma-separated IPs (e.g. 1.1.1.1,8.8.8.8) will use normal unencrypted DNS, or perhaps a pihole in the local network.
-  * HOST_NETWORK: to enable free flow between host network and the docker (e.g. when using docker bridge network). Otherwise, your proxies will only work from within the docker network. Must be in CIDR format e.g. 192.168.0.1/24
+  * HOST_NETWORK: to enable free flow between host network and the docker (e.g. when using docker bridge network). Otherwise, your proxies will only work from within the docker network. Must be in CIDR format e.g. 192.168.1.0/24
   * DNS_SERVER_PORT: the docker will serve as a DNS server for the local network so everything, including DNS, comes out of the VPN exit.
     * Work best if set to 53 as most things can't handle DNS on other ports. In which case, you have to give the docker its own static IP (i.e. use docker macvlan network) if the host also uses port 53 e.g. if you run a Pihole on the host IP. For Unraid, use Custom : br0 / br1 network (to enable this, go to Settings -> Docker).
     * You will need to set each device DNS to the docker IP.
@@ -38,7 +42,9 @@ OpenVPN Client with integrated (NZB)**Hy**dra2-**De**luge-**Sa**bnzbd (and HTTP 
         -v <host path for config>:/config \
         -v <host path for data>:/data \
         -e DNS_SERVERS=127.2.2.2 \
-        -e HOST_NETWORK=192.168.0.1/24 \
+        -e HOST_NETWORK=192.168.1.0/24 \
+        -e SERVER_IP=192.168.1.2 \
+        -p 8000:8000/tcp \
         -p 53:53/tcp \
         -p 53:53/udp \
         -p 9118:9118/tcp \
@@ -47,6 +53,7 @@ OpenVPN Client with integrated (NZB)**Hy**dra2-**De**luge-**Sa**bnzbd (and HTTP 
         -p 8090:8090/tcp \
         -p 8112:8112/tcp \
         -p 5076:5076/tcp \
+        -e LAUNCHER_GUI_PORT=8000 \
         -e DNS_SERVER_PORT=53 \
         -e SOCKS_PROXY_PORT=9118 \
         -e HTTP_PROXY_PORT=8118 \
@@ -64,7 +71,9 @@ OpenVPN Client with integrated (NZB)**Hy**dra2-**De**luge-**Sa**bnzbd (and HTTP 
         -v '/mnt/user/appdata/openvpn-hydesa':'/config':'rw' \
         -v '/mnt/user/downloads/':'/data':'rw' \
         -e 'DNS_SERVERS'='127.2.2.2' \
-        -e 'HOST_NETWORK'='10.132.6.0/23' \
+        -e 'HOST_NETWORK'='192.168.1.0/23' \
+        -e 'SERVER_IP'='192.168.1.2' \
+        -p '8000:8000/tcp' \
         -p '8153:53/tcp' \
         -p '8153:53/udp' \
         -p '9118:9118/tcp' \
@@ -73,6 +82,7 @@ OpenVPN Client with integrated (NZB)**Hy**dra2-**De**luge-**Sa**bnzbd (and HTTP 
         -p '8090:8090/tcp' \
         -p '8112:8112/tcp' \
         -p '5076:5076/tcp' \
+        -e 'LAUNCHER_GUI_PORT'='8000' \
         -e 'DNS_SERVER_PORT'='53' \
         -e 'SOCKS_PROXY_PORT'='9118' \
         -e 'HTTP_PROXY_PORT'='8118' \
