@@ -23,6 +23,8 @@ cp -f /temp/* /static/config/ \
     && rm -rf /temp
 
 # fix static files for repo-specific stuff
+sed -i "s|\/etc\/openvpn|\/config\/openvpn|g" '/static/scripts/openvpn.sh'
+sed -i "s|\/etc\/openvpn|\/config\/openvpn|g" '/static/scripts/set_variables_ovpn_port_proto.sh'
 sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_stubby.sh'
 sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_dante.sh'
 sed -i "s|\/etc\/|\/config\/|g" '/static/scripts/fix_config_tinyproxy.sh'
