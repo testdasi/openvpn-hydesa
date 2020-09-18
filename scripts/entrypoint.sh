@@ -33,7 +33,7 @@ echo "[info] Quick block test. Expected result is time out. Actual result is $ip
 ### OpenVPN ###
 echo ''
 echo "[info] Setting up OpenVPN tunnel"
-source /openvpn.sh
+source /static/scripts/openvpn.sh
 echo '[info] Done'
 
 ### Dante SOCKS proxy to VPN ###
@@ -62,6 +62,11 @@ echo ''
 echo "[info] Run nzbhydra2 in background on port $HYDRA_PORT"
 /app/nzbhydra2/nzbhydra2 --daemon --nobrowser --java /usr/lib/jvm/java-11-openjdk-amd64/bin/java --datafolder /config/nzbhydra2 --pidfile /config/nzbhydra2/nzbhydra2.pid
 
+### GUI launcher
+echo ''
+echo "[info] Run GUI launcher in background at $LAUNCHER_IP:$LAUNCHER_PORT"
+screen -d -m -fa -S launcher /app/launcher/launcher-python3.sh
+
 ### Infinite loop to stop docker from stopping ###
 sleep 10s
 while true
@@ -83,5 +88,7 @@ do
     echo "[info] deluge PID: $pidlist"
     pidlist=$(cat /config/nzbhydra2/nzbhydra2.pid)
     echo "[info] nzbhydra2 PID: $pidlist"
+    pidlist=$(pidof python3)
+    echo "[info] GUI launcher PID: $pidlist"
     sleep 3600s
 done
