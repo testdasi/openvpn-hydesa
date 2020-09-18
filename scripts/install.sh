@@ -2,7 +2,7 @@
 
 # install deluge and deluge-web
 apt-get -y update \
-    && apt-get -y install deluged deluge-web
+    && apt-get -y install deluged deluge-web screen
 
 # clean up
 apt-get -y autoremove \
