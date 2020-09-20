@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### Kill of ovpn not found ###
-if [[ -f "/etc/openvpn/openvpn.ovpn" ]]
+if [[ -f "/config/openvpn/openvpn.ovpn" ]]
 then
     echo '[info] Config file detected...'
     ### Set various variable values ###
