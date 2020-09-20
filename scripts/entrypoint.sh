@@ -1,6 +1,6 @@
 #!/bin/bash
 
-### Kill of ovpn not found ###
+### Only run process if ovpn found ###
 if [[ -f "/config/openvpn/openvpn.ovpn" ]]
 then
     echo '[info] Config file detected...'
