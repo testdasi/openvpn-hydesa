@@ -64,7 +64,7 @@ then
     ### GUI launcher
     echo ''
     echo "[info] Run GUI launcher in background at $LAUNCHER_IP:$LAUNCHER_PORT"
-    screen -d -m -fa -S launcher /app/launcher/launcher-python3.sh
+    start-stop-daemon --start --background --name launcher --chdir /app/launcher --exec /app/launcher/launcher-python3.sh
 
     ### Infinite loop to stop docker from stopping ###
     sleep_time=10
