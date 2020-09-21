@@ -148,7 +148,7 @@ then
         then
             echo '[warn] WebUI launcher crashed, restarting'
             crashed=$(( $crashed + 1 ))
-            screen -d -m -fa -S launcher /app/launcher/launcher-python3.sh
+            start-stop-daemon --start --background --name launcher --chdir /app/launcher --exec /app/launcher/launcher-python3.sh
         else
             echo "[info] WebUI launcher PID: $pidlist"
         fi
