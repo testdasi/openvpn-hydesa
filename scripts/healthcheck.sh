@@ -31,7 +31,19 @@ then
     sabnzbdplus --daemon --config-file /config/sabnzbdplus/sabnzbdplus.ini --pidfile /config/sabnzbdplus/sabnzbd.pid
 fi
 
-# deluge
+pidlist=$(pgrep deluged)
+if [ -z "$pidlist" ]
+then
+    crashed=$(( $crashed + 1 ))
+    deluged --quiet --port=58846 --config=/config/deluge-web
+fi
+
+pidlist=$(pgrep deluge-web)
+if [ -z "$pidlist" ]
+then
+    crashed=$(( $crashed + 1 ))
+    deluge-web --fork --quiet --config=/config/deluge-web
+fi
 
 pidlist=$(pgrep nzbhydra2)
 if [ -z "$pidlist" ]
